@@ -8,26 +8,45 @@ function adicionarAmigo() {
         return;        
     }
 
-    if (nomeDosAmigos.includes(amigos)) { // Verifica se o nome já existe no array
+    if (nomeDosAmigos.includes(amigos)) {
         alert('Este nome já foi adicionado!');
         return;
     }
-    
+
     nomeDosAmigos.push(amigos);
     console.log(nomeDosAmigos);
     document.getElementById("amigo").value = ""; //limpa o campo de entrada
 
-    atualizarLista(); //chama a função para atualizar a lista na tela
+    atualizarLista(); 
 }
 
 function atualizarLista() {
-    let lista = document.getElementById("listaAmigos"); // Selecionar a lista <ul>
+    let lista = document.getElementById("listaAmigos"); 
 
     lista.innerHTML = ""; // Limpar a lista antes de adicionar novos elementos
 
     for (let i = 0; i < nomeDosAmigos.length; i++) {
         let item = document.createElement("li"); // Criar um novo <li>
-        item.textContent = nomeDosAmigos[i]; // Definir o nome como texto do <li>
-        lista.appendChild(item); // Adicionar o <li> à <ul>
+        item.textContent = nomeDosAmigos[i]; 
+        lista.appendChild(item); 
     }
+}
+
+function sortearAmigo() {
+    if (nomeDosAmigos.length === 0) { 
+        alert("Nenhum amigo disponível para sortear!");
+        return;
+    }
+
+    let indiceSorteado = Math.floor(Math.random() * nomeDosAmigos.length);
+    let amigoSorteado = nomeDosAmigos[indiceSorteado];
+
+    let resultado = document.getElementById("resultadoSorteio");
+    if (!resultado) {
+        resultado = document.createElement("p");
+        resultado.id = "resultadoSorteio";
+        document.body.appendChild(resultado);
+    }
+
+    resultado.innerHTML = `🎉 O amigo sorteado foi: <strong>${amigoSorteado}</strong>`; 
 }
